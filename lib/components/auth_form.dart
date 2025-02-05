@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chat/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,8 @@ class _AuthFormState extends State<AuthForm> {
   final _formData = AuthFormData();
 
   void _submit() {
-    _formKey.currentState?.validate();
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if (!isValid) return;
   }
 
   @override
@@ -32,12 +35,26 @@ class _AuthFormState extends State<AuthForm> {
                     initialValue: _formData.name,
                     onChanged: (name) => _formData.name = name,
                     decoration: InputDecoration(labelText: 'Nome'),
+                    validator: (_name) {
+                      final name = _name ?? '';
+                      if (name.trim().length < 5) {
+                        return 'Nome deve ter no minimo 5 caracteres';
+                      }
+                      return null;
+                    },
                   ),
                 TextFormField(
                   key: ValueKey('email'),
                   initialValue: _formData.email,
                   onChanged: (email) => _formData.email = email,
                   decoration: InputDecoration(labelText: 'E-mail'),
+                  validator: (_email) {
+                    final email = _email ?? '';
+
+                    if (!email.contains('@')) {
+                      return 'E-mail invalido por favor insira um email válido';
+                    }
+                  },
                 ),
                 TextFormField(
                   key: ValueKey('password'),
@@ -45,6 +62,12 @@ class _AuthFormState extends State<AuthForm> {
                   onChanged: (password) => _formData.password = password,
                   decoration: InputDecoration(labelText: 'senha'),
                   obscureText: true,
+                  validator: (_password) {
+                    final password = _password ?? '';
+                    if (password.length < 6) {
+                      return 'Senha deve ter no mínimo 6 caracteres';
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 12,
