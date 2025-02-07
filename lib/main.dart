@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.blue,
           primary: Colors.blue,
         ),
-        useMaterial3: true,
+        useMaterial3: true, 
       ),
       home: AuthPage(),
       debugShowCheckedModeBanner: false,
