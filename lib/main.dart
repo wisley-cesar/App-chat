@@ -13,9 +13,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        textTheme: TextTheme(
+          displayLarge: TextStyle(
+              fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blue),
+          displayMedium: TextStyle(
+              fontSize: 28, fontWeight: FontWeight.w600, color: Colors.white),
+          bodyLarge: TextStyle(fontSize: 18, color: Colors.black87),
+          bodyMedium: TextStyle(fontSize: 16, color: Colors.black54),
+        ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
           primary: Colors.blue,
+          secondary: Colors.white,
         ),
         useMaterial3: true,
       ),
