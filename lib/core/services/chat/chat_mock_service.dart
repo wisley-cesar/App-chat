@@ -11,7 +11,7 @@ class ChatMockService implements ChatService {
       text: 'Bom dia!',
       createdAt: DateTime.now(),
       userID: '123',
-      userName: 'Wisley Teste',
+      userName: 'Wisley',
       userImageUrl: 'assets/images/avatar.png',
     ),
     ChatMessage(
@@ -23,11 +23,11 @@ class ChatMockService implements ChatService {
       userImageUrl: 'assets/images/avatar.png',
     ),
     ChatMessage(
-      id: '3',
+      id: '1',
       text: 'Bom dia! teremos sim! Pode ser agora?',
       createdAt: DateTime.now(),
-      userID: '456',
-      userName: 'Wisley Teste',
+      userID: '123',
+      userName: 'Wisley ',
       userImageUrl: 'assets/images/avatar.png',
     ),
   ];
