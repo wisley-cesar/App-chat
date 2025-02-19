@@ -1,5 +1,7 @@
 import 'package:chat/core/services/notification/chat_notification_service.dart';
+import 'package:chat/core/services/routes/app_routes.dart';
 import 'package:chat/pages/auth_or_app_page.dart';
+import 'package:chat/pages/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +38,7 @@ class MyApp extends StatelessWidget {
         ),
         home: AuthOrAppPage(),
         debugShowCheckedModeBanner: false,
+        routes: {AppRoutes.notificationPage: (ctx) => NotificationPage()},
       ),
     );
   }
