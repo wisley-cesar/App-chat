@@ -1,5 +1,5 @@
 import 'package:chat/core/models/chat_user.dart';
-import 'package:chat/core/services/auth/auth_mock_service.dart';
+import 'package:chat/core/services/auth/auth_service.dart';
 import 'package:chat/pages/auth_page.dart';
 import 'package:chat/pages/chat_page.dart';
 import 'package:chat/pages/loading_page.dart';
@@ -19,12 +19,14 @@ class AuthOrAppPage extends StatelessWidget {
       future: init(context),
       builder: (ctx, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return LoadingPage();
+          print(snapshot.connectionState == ConnectionState.waiting);
+          return const LoadingPage();
         } else {
           return StreamBuilder<ChatUser?>(
-            stream: AuthMockService().userChanges,
+            stream: AuthService().userChanges,
             builder: (ctx, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
+                // print(snapshot.connectionState == ConnectionState.waiting);
                 return LoadingPage();
               } else {
                 return snapshot.hasData ? ChatPage() : AuthPage();
