@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "196041664257",
+    "project_id": "app-chat-95f9a",
+    "storage_bucket": "app-chat-95f9a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196041664257:android:d1b34c0c323682da85dd00",
+        "android_client_info": {
+          "package_name": "br.com.wisley.chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5bmJ3ijvjZEAldElJ-o2sSTjsaYHITTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

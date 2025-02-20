@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/wisley/Curso de Flutter/chat/linux"
+    "cmake.sourceDirectory": "/Users/wisley/Curso de Flutter/chat/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
