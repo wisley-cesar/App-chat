@@ -15,38 +15,55 @@ class ChatFirebaseService implements ChatService {
     final store = FirebaseFirestore.instance;
 
     // Estou transformando o ChatMessage -> Map<String, dynamic>
-    final docRef = await store.collection('chat').add({
-      'text': text,
-      'createdAt': DateTime.now().toIso8601String(),
-      'userID': user.id,
-      'userName': user.name,
-      'userImageUrl': user.imageURL,
-    });
+    // final docRef = await store.collection('chat').add({
+    //   'text': text,
+    //   'createdAt': DateTime.now().toIso8601String(),
+    //   'userID': user.id,
+    //   'userName': user.name,
+    //   'userImageUrl': user.imageURL,
+    // });
 
     // Estou transformando o Map<String, dynamic> ->  ChatMessage
     // Fazendo o contrario agora
-    final doc = await docRef.get();
-    final data = doc.data()!;
+    // final doc = await docRef.get();
+    // final data = doc.data()!;
+    // return ChatMessage(
+    //   id: doc.id,
+    //   text: data['text'],
+    //   createdAt: DateTime.parse(data['createdAt']),
+    //   userID: data['userID'],
+    //   userName: data['userName'],
+    //   userImageUrl: data['userImageUrl'],
+    // );
 
-    return ChatMessage(
-      id: doc.id,
-      text: data['text'],
-      createdAt: DateTime.parse(data['createdAt']),
-      userID: data['userID'],
-      userName: data['userName'],
-      userImageUrl: data['userImageUrl'],
+    // usanso o withConverter dessa vez
+    final msg = ChatMessage(
+      id: '',
+      text: text,
+      createdAt: DateTime.now(),
+      userId: user.id,
+      userName: user.name,
+      userImageUrl: user.imageUrl,
     );
+    final docRef = await store
+        .collection('chat')
+        .withConverter(
+          fromFirestore: _fromFirestore,
+          toFirestore: _toFirestore,
+        )
+        .add(msg);
+    final doc = await docRef.get();
+    return doc.data()!;
   }
-  // Estou transformando o Map<String, dynamic> ->  ChatMessage
-
+  // ChatMessage => Map<String, dynamic>
   Map<String, dynamic> _toFirestore(
     ChatMessage msg,
     SetOptions? options,
   ) {
     return {
-      'text': msg,
+      'text': msg.text,
       'createdAt': msg.createdAt.toIso8601String(),
-      'userID': msg.userID,
+      'userID': msg.userId,
       'userName': msg.userName,
       'userImageUrl': msg.userImageUrl,
     };
@@ -61,7 +78,7 @@ class ChatFirebaseService implements ChatService {
       id: doc.id,
       text: doc['text'],
       createdAt: DateTime.parse(doc['createdAt']),
-      userID: doc['userID'],
+      userId: doc['userID'],
       userName: doc['userName'],
       userImageUrl: doc['userImageUrl'],
     );

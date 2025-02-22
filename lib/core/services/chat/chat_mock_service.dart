@@ -48,9 +48,9 @@ class ChatMockService implements ChatService {
       id: Random().nextDouble().toString(),
       text: text,
       createdAt: DateTime.now(),
-      userID: user.id,
+      userId: user.id,
       userName: user.name,
-      userImageUrl: user.imageURL,
+      userImageUrl: user.imageUrl,
     );
     _msgs.add(_newMessage);
 

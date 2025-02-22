@@ -91,7 +91,7 @@ class AuthFirebaseService implements AuthService {
     return docRef.set({
       'name': user.name,
       'email': user.email,
-      'imageUrl': user.imageURL,
+      'imageUrl': user.imageUrl,
     });
   }
 
@@ -100,7 +100,7 @@ class AuthFirebaseService implements AuthService {
       id: user.uid,
       name: user.displayName ?? user.email!.split('@')[0],
       email: user.email!,
-      imageURL: imageUrl ?? user.photoURL ?? 'assets/images/avatar.png',
+      imageUrl: imageUrl ?? user.photoURL ?? 'assets/images/avatar.png',
     );
   }
 }
