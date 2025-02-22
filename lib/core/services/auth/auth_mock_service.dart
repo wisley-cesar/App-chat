@@ -46,7 +46,6 @@ class AuthMockService implements AuthService {
       imageURL: image?.path ?? 'assets/images/avatar.png',
     );
     _users.putIfAbsent(email, () => newUser);
-    print(newUser.id);
     _updateUser(newUser);
   }
 
