@@ -8,7 +8,6 @@ class ChatFirebaseService implements ChatService {
   @override
   Stream<List<ChatMessage>> messagesStream() {
     final store = FirebaseFirestore.instance;
-
     final snapshots = store
         .collection('chat')
         .withConverter(
@@ -93,7 +92,7 @@ class ChatFirebaseService implements ChatService {
     };
   }
 
-  // Estou transformando o Map<String, dynamic> ->  ChatMessage
+  // Map<String, dynamic> => ChatMessage
   ChatMessage _fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> doc,
     SnapshotOptions? options,
