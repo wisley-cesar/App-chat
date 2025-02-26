@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:chat/components/messages.dart';
 import 'package:chat/components/new_message.dart';
-import 'package:chat/core/models/chat_notification.dart';
 import 'package:chat/core/services/auth/auth_service.dart';
 import 'package:chat/core/services/notification/chat_notification_service.dart';
 import 'package:chat/core/services/routes/app_routes.dart';
-import 'package:chat/pages/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +11,6 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final chatProvider = Provider.of<ChatNotificationService>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -71,7 +66,7 @@ class ChatPage extends StatelessWidget {
                   maxRadius: 10,
                   backgroundColor: Colors.red.shade800,
                   child: Text(
-                    '${chatProvider.itemsCount}',
+                    '${Provider.of<ChatNotificationService>(context).itemsCount}',
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary,
                         fontSize: 12),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:chat/core/models/chat_user.dart';
 import 'package:chat/core/services/auth/auth_firebase_service.dart';
 
@@ -14,10 +13,12 @@ abstract class AuthService {
     String password,
     File? image,
   );
+
   Future<void> login(
     String email,
     String password,
   );
+
   Future<void> logout();
 
   factory AuthService() {
