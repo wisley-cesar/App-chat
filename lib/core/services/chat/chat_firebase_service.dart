@@ -7,7 +7,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ChatFirebaseService implements ChatService {
   @override
   Stream<List<ChatMessage>> messagesStream() {
-    return Stream<List<ChatMessage>>.empty();
+    final store = FirebaseFirestore.instance;
+
+    final snapshots = store
+        .collection('chat')
+        .withConverter(
+          fromFirestore: _fromFirestore,
+          toFirestore: _toFirestore,
+        )
+        .snapshots();
+
+    return snapshots.map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return doc.data();
+      }).toList();
+    });
+
+    // return Stream<List<ChatMessage>>.multi((controller) {
+    //   snapshots.listen((snapshot) {
+    //     List<ChatMessage> lista = snapshot.docs.map((doc) {
+    //       return doc.data();
+    //     }).toList();
+    //     controller.add(lista);
+    //   });
+    // });
   }
 
   @override
@@ -55,6 +78,7 @@ class ChatFirebaseService implements ChatService {
     final doc = await docRef.get();
     return doc.data()!;
   }
+
   // ChatMessage => Map<String, dynamic>
   Map<String, dynamic> _toFirestore(
     ChatMessage msg,
@@ -63,7 +87,7 @@ class ChatFirebaseService implements ChatService {
     return {
       'text': msg.text,
       'createdAt': msg.createdAt.toIso8601String(),
-      'userID': msg.userId,
+      'userId': msg.userId,
       'userName': msg.userName,
       'userImageUrl': msg.userImageUrl,
     };
@@ -78,7 +102,7 @@ class ChatFirebaseService implements ChatService {
       id: doc.id,
       text: doc['text'],
       createdAt: DateTime.parse(doc['createdAt']),
-      userId: doc['userID'],
+      userId: doc['userId'],
       userName: doc['userName'],
       userImageUrl: doc['userImageUrl'],
     );
