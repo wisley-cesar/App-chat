@@ -4,8 +4,7 @@ import 'package:chat/pages/auth_or_app_page.dart';
 import 'package:chat/pages/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-void main() { 
+ void main() { 
   runApp(const MyApp());
 }
 
